@@ -14,7 +14,7 @@ This script does everything locally, except for actually hosting the repos/Pages
 
 ## Slowstart - in a fresh Debian VM
 
-If you have Vagrant and Virtualbox, we can also go through this from scratch using [the install-in-a-box](https://hiandrewquinn.github.io/til-site/posts/the-unreasonable-effectiveness-of-vms-in-hacker-pedagogy/) approach. First get a fresh Debian 12 VM up by running e.g.
+If you have Vagrant and Virtualbox, we can also go through this from scratch using [the tutorial-in-a-box](https://hiandrewquinn.github.io/til-site/posts/the-unreasonable-effectiveness-of-vms-in-hacker-pedagogy/) approach. First get a fresh Debian 12 VM up by running e.g.
 
 ```bash
 mkdir tutorial/
@@ -30,10 +30,28 @@ Once you're inside, you'll need to install some dependencies. We'll use the [off
 ```bash
 # While in the Debian 12 VM - ripped straight from the Github docs.
 (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
-&& sudo mkdir -p -m 755 /etc/apt/keyrings \
-&& wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
-&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
-&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-&& sudo apt update \
-&& sudo apt install gh git hugo curl -y
+  && sudo mkdir -p -m 755 /etc/apt/keyrings \
+  && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+  && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+  && sudo apt update \
+  && sudo apt install gh git hugo curl -y
 ```
+
+Log in to Github with your credentials. (The web browser will fail to open, but you can just paste the key in in your non-VM's browser at the given address.)
+
+```bash
+# While in the Debian 12 VM - ripped straight from the Github docs.
+gh auth login 
+```
+
+If `gh auth status` shows you are logged in, then you are ready to go, my friend. Since we're experimenting, we will save the setup script locally and run it with a couple options.
+
+
+```bash
+curl -o rabbitholer.sh https://raw.githubusercontent.com/Siilikuin/rabbitholer/master/rabbitholer.sh
+chmod +x rabbitholer.sh
+./rabbitholer.sh --help
+```
+
+Running `rabbitholer.sh --force` will **delete your earlier forks** and set up new ones, so use with caution. If you don't have any content except the example content in your `rabbitholer` repo anyway, though, that shouldn't be an issue!
