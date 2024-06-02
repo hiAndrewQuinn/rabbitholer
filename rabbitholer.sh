@@ -97,6 +97,11 @@ check_and_fork_repo "rabbitholer-content"
 # Check and fork siilikuin/rabbitholer
 check_and_fork_repo "rabbitholer"
 
+echo "... Waiting 3 seconds, to let Github catch up"
+sleep 1 && echo "... 2"
+sleep 1 && echo "... 1"
+sleep 1 && echo "... back to it!"
+
 # Define the working directory
 WORK_DIR="$HOME/rabbitholer-work"
 
@@ -142,7 +147,8 @@ if ! gh repo view "${GH_USER}/rabbitholer-pages" >/dev/null 2>&1; then
 fi
 
 # Build the Hugo site with the correct baseURL
-hugo --minify -d "${WORK_DIR}/rabbitholer/public" --baseURL "https://${GH_USER}.github.io/rabbitholer-pages/"
+BASE_URL="https://${GH_USER}.github.io/rabbitholer-pages/"
+hugo --minify -d "${WORK_DIR}/rabbitholer/public" --baseURL "$BASE_URL"
 
 # Clone the rabbitholer-pages repository into the public directory
 cd "${WORK_DIR}/rabbitholer/public"
@@ -157,7 +163,14 @@ git commit -m "Deploy Hugo site"
 # Push to the gh-pages branch
 git push -u origin gh-pages --force
 
-# Configure GitHub Pages
-gh api -X POST "/repos/${GH_USER}/rabbitholer-pages/pages" -f "source[branch]=gh-pages" -f "source[path]="
+# Configure GitHub Pages if not already configured
+PAGES_STATUS=$(gh api "/repos/${GH_USER}/rabbitholer-pages/pages" -H "Accept: application/vnd.github.v3+json" 2>&1 || true)
+if echo "$PAGES_STATUS" | grep -q "Not Found"; then
+	gh api -X POST "/repos/${GH_USER}/rabbitholer-pages/pages" -f "source[branch]=gh-pages" -f "source[path]=/" || true
+else
+	echo "GitHub Pages is already enabled."
+fi
 
 echo "Your site has been built and deployed to GitHub Pages: https://${GH_USER}.github.io/rabbitholer-pages"
+
+exit 0
