@@ -35,7 +35,18 @@ Once you're inside, you'll need to install some dependencies. We'll use the [off
   && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
   && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
   && sudo apt update \
-  && sudo apt install gh git hugo curl -y
+  && sudo apt install gh git curl -y
+```
+
+Debian, as usual, lags behind in software versions somewhat, so we will need to get the latest Hugo from elsewhere:
+
+```bash
+sudo apt update
+sudo apt install wget tar
+wget https://github.com/gohugoio/hugo/releases/download/v0.126.0/hugo_0.126.0_Linux-64bit.tar.gz
+tar -xzf hugo_0.126.0_Linux-64bit.tar.gz
+sudo mv hugo /usr/local/bin/
+hugo version
 ```
 
 Log in to Github with your credentials. (The web browser will fail to open, but you can just paste the key in in your non-VM's browser at the given address.)
@@ -53,5 +64,7 @@ curl -o rabbitholer.sh https://raw.githubusercontent.com/Siilikuin/rabbitholer/m
 chmod +x rabbitholer.sh
 ./rabbitholer.sh --help
 ```
+
+You will likely get that `*** Please tell me who you are.` message the first time you try to actually run this script. 
 
 Running `rabbitholer.sh --force` will **delete your earlier forks** and set up new ones, so use with caution. If you don't have any content except the example content in your `rabbitholer` repo anyway, though, that shouldn't be an issue!
