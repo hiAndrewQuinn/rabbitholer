@@ -45,7 +45,7 @@ sudo apt update
 sudo apt install wget tar
 wget https://github.com/gohugoio/hugo/releases/download/v0.126.0/hugo_0.126.0_Linux-64bit.tar.gz
 tar -xzf hugo_0.126.0_Linux-64bit.tar.gz
-sudo mv hugo /usr/local/bin/
+sudo mv hugo /usr/bin/
 hugo version
 ```
 
