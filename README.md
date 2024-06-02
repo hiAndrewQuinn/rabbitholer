@@ -68,3 +68,11 @@ chmod +x rabbitholer.sh
 You will likely get that `*** Please tell me who you are.` message the first time you try to actually run this script. 
 
 Running `rabbitholer.sh --force` will **delete your earlier forks** and set up new ones, so use with caution. If you don't have any content except the example content in your `rabbitholer` repo anyway, though, that shouldn't be an issue!
+
+From here you've got a couple options. The flow is always going to be the same:
+
+1. Add to your `rabbitholer-content` repo,
+2. `git submodule --update` your `rabbitholer` repo, and
+3. Build and push the new changes to your `rabbitholer-pages` repo, however you wish.
+
+In the near future I will write a separate `rabbitholer-update.sh` script which automates these steps, too. Stay tuned!
