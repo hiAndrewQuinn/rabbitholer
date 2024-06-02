@@ -13,7 +13,7 @@
       <link>//localhost:1313/readme/</link>
       <pubDate>Sun, 02 Jun 2024 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/readme/</guid>
-      <description>Because WordPress is just too darn complicated.&#xA;Rabbitholer is a project with a simple goal: Leverage the power of Git submodules to make it as simple as can be to generate a static website from Markdown files, but no simpler.&#xA;What you are reading right now is a properly-formatted example post from rabbitholer-content.&#xA;You will need 4 tags in your YAML frontmatter, although only title needs to actually have anything in it:</description>
+      <description>Because WordPress is just too darn complicated.&#xA;Rabbitholer is a project with a simple goal: Leverage the power of Git submodules to make it as simple as can be to generate a static website from Markdown files, but no simpler.&#xA;What you are reading right now is a properly-formatted example post from rabbitholer-content.&#xA;All your posts will need at least a title tag. You may also want&#xA;A subtitle tag, A date tag, in YYYY-MM-DD format, and a set of tags to aid future navigators.</description>
     </item>
     <item>
       <title>Example 2</title>
